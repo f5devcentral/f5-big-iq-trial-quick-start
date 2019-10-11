@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start
 ===============================================
 
-F5 [BIG-IQ Centralized Management](https://www.f5.com/products/automation-and-orchestration/big-iq): Manage your BIG-IP devices—and the services they deliver.
+F5 [BIG-IQ Centralized Management](https://www.f5.com/products/automation-and-orchestration/big-iq): Manage your BIG-IP devices — and the services they deliver.
 
 This **CloudFormation Template (CFT)** or **Azure Resource Manager (ARM)** creates two BIG-IQ VE instances: 
 
