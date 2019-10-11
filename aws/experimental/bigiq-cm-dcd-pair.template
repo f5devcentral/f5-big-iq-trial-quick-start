@@ -304,6 +304,8 @@
                                                     ]
                                                 ]
                                             },
+                                            "chmod +x /config/cloud/import-as3-templates.sh",
+                                            "/config/cloud/import-as3-templates.sh",
                                             {
                                                 "Fn::Join": [
                                                     "",

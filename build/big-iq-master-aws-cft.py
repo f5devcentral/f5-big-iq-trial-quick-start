@@ -97,6 +97,8 @@ def define_instance_init_files (t, args):
                             "--DCD_USERNAME admin"
                         ])
                     ]),
+                    "chmod +x /config/cloud/import-as3-templates.sh",
+                    "/config/cloud/import-as3-templates.sh",
                     Join("", [
                         "tmsh modify auth user admin",
                         ' password "$BIG_IQ_PWD"',
