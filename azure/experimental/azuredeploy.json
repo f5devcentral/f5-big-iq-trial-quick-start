@@ -37,7 +37,6 @@
             "defaultValue": "Standard_D8s_v3",
             "allowedValues": [
                 "Standard_D4s_v3",
-                "Standard_D2s_v3",
                 "Standard_D8s_v3",
                 "Standard_D16s_v3"
             ],
@@ -56,22 +55,6 @@
                 "description": "F5 BIG-IQ version you want to use."
             }
         },
-        "servicePrincipalSecret":{
-            "minLength": 1,
-            "maxLength": 666,
-            "type": "string",
-            "metadata": {
-                "description": "azure f5 service principal secret key"
-            }
-        },
-        "azureClientId":{
-            "minLength": 1,
-            "maxLength": 111,
-            "type": "string",
-            "metadata": {
-                "description": "azure client id"
-            }
-        },
         "bigIqCMLicenseKey1": {
             "minLength": 1,
             "maxLength": 255,
@@ -88,8 +71,9 @@
                 "description": "F5 BIG-IQ DCD license key"
             }
         },
-        "bigIQmasterKey": {
-            "minLength": 1,
+        "bigIQMasterPassphraseKey": {
+            "defaultValue": "Thisisthemasterkey#1234",
+            "minLength": 16,
             "maxLength": 255,
             "type": "string",
             "metadata": {
@@ -206,7 +190,7 @@
         },
         "cmDnsName": "[concat('azurebigiq-cm','-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "dcdDnsName": "[concat('azurebigiq-dcd','-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
-        "bigIQmasterKey" : "[parameters('bigIQmasterKey')]",
+        "bigIQMasterPassphraseKey" : "[parameters('bigIQMasterPassphraseKey')]",
         "dcdInstanceName": "[toLower(parameters('dcdInstanceName'))]",
         "cmInstanceName": "[toLower(parameters('cmInstanceName'))]",
         "virtualNetworkName": "[concat('BIG-IQ-VNET-',variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
@@ -700,7 +684,7 @@
             "tags": "[if(empty(variables('tagValues')), json('null'), variables('tagValues'))]",
             "properties": {
                 "protectedSettings": {
-                    "commandToExecute": "[concat('mount -o remount,rw /usr;sleep 180; pip install azure;mkdir -p /config/cloud; cd /config/cloud ; curl -L https://github.com/f5devcentral/f5-big-iq-trial-quick-start/blob/7.0.0/azure/built/scripts.tar.gz?raw=true > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ' ,variables('singleQuote') , concat('#!/usr/bin/env bash','\n','sleep 90','\n','mount -o remount,rw /usr','\n','mkdir -p /config/cloud\n','cd /config/cloud \n','curl -L https://github.com/f5devcentral/f5-big-iq-trial-quick-start/blob/7.0.0/azure/built/scripts.tar.gz?raw=true > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz \n','/config/cloud/configure-bigiq.py --LICENSE_KEY ', parameters('bigIqCMLicenseKey1'),' --MASTER_PASSPHRASE ', parameters('bigIQMasterPassphraseKey'),' --TIMEOUT_SEC 1200 --NODE_TYPE CM --HOST_NAME ',reference(variables('intPublicIPAddressName')).dnsSettings.fqdn,'\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ failed, might be an issue with license activation, tail -f /var/log/setup.log for more details.','\n','  exit 1','\n','fi\n','sleep 10\n','/config/cloud/add-dcd.py --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --DCD_PWD ',variables('bigIqPassword'),' --DCD_USERNAME adminUser','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ DCD to CM failed, tail -f /var/log/restjavad.0.log for more details.','\n','  exit 1','\n','fi\n','sleep 10\n','tmsh modify auth user admin password ',variables('bigIqPassword'),' && tmsh save sys config','\n','/config/cloud/activate-dcd-services.py --SERVICES asm --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,'\n','set-basic-auth on \n',' --BIG_IQ_PWD ',variables('bigIqPassword'),' \n','set-basic-auth off \n','/config/cloud/create-auto-scaling.py --RESOURCE ', variables('resourceGroupName') ,' --DEFAULT_LOCATION ',variables('location'),' --VNET1 ',variables('virtualNetworkName'),' --SUBNET1 ',variables('mgmtSubnetName'),' --BIGIQ_URI http://localhost:8100',' --CM_IP ',reference(variables('intNicName')).ipConfigurations[0].properties.privateIPAddress,' --BIG_IQ_PWD ',variables('bigIqPassword'),'\n',' > /config/cloud/setup-cm-background.sh;chmod +x /config/cloud/setup-cm-background.sh;','echo ', variables('cmStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-cm.sh; chmod +x /config/cloud/setup-cm.sh;nohup /config/cloud/setup-cm.sh &> /var/log/setup.log < /dev/null &')]"
+                     "commandToExecute": "[concat('mount -o remount,rw /usr;sleep 180; pip install azure;mkdir -p /config/cloud; cd /config/cloud ; curl -L https://github.com/f5devcentral/f5-big-ip-cloud-edition-trial-quick-start/blob/6.1.0/azure/built/scripts.tar.gz?raw=true > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ' ,variables('singleQuote') , concat('#!/usr/bin/env bash','\n','sleep 90','\n','mount -o remount,rw /usr','\n','mkdir -p /config/cloud\n','cd /config/cloud \n','curl -L https://github.com/f5devcentral/f5-big-ip-cloud-edition-trial-quick-start/blob/6.1.0/azure/built/scripts.tar.gz?raw=true > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz \n','/config/cloud/configure-bigiq.py --LICENSE_KEY ', parameters('bigIqCMLicenseKey1'),' --MASTER_PASSPHRASE ', parameters('bigIQMasterPassphraseKey'),' --TIMEOUT_SEC 1200 --NODE_TYPE CM --HOST_NAME ',reference(variables('intPublicIPAddressName')).dnsSettings.fqdn,'\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ failed, might be an issue with license activation, tail -f /var/log/setup.log for more details.','\n','  exit 1','\n','fi\n','sleep 10\n','/config/cloud/add-dcd.py --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --DCD_PWD ',variables('bigIqPassword'),' --DCD_USERNAME adminUser','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ DCD to CM failed, tail -f /var/log/restjavad.0.log for more details.','\n','  exit 1','\n','fi\n','sleep 10\n','tmsh modify auth user admin password ',variables('bigIqPassword'),' && tmsh save sys config','\n','/config/cloud/activate-dcd-services.py --SERVICES asm --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,'\n','set-basic-auth on \n','/config/cloud/create-license-pool.py --REG_KEY ',parameters('bigIPLicensePoolKey'),' --BIG_IQ_PWD ',variables('bigIqPassword'),' \n','set-basic-auth off \n','/config/cloud/create-auto-scaling.py --RESOURCE ', variables('resourceGroupName') ,' --DEFAULT_LOCATION ',variables('location'),' --VNET1 ',variables('virtualNetworkName'),' --SUBNET1 ',variables('mgmtSubnetName'),' --BIGIQ_URI http://localhost:8100',' --CM_IP ',reference(variables('intNicName')).ipConfigurations[0].properties.privateIPAddress,' --BIG_IQ_PWD ',variables('bigIqPassword')), variables('singleQuote'), ' > /config/cloud/setup-cm-background.sh;chmod +x /config/cloud/setup-cm-background.sh;','echo ', variables('cmStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-cm.sh; chmod +x /config/cloud/setup-cm.sh;nohup /config/cloud/setup-cm.sh &> /var/log/setup.log < /dev/null &')]"
                 },
                 "publisher": "Microsoft.Azure.Extensions",
                 "settings": {

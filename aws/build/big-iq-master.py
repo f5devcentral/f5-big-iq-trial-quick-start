@@ -75,13 +75,15 @@ def define_instance_init_files (t, args):
                 content = Join("\n", [
                     # This script is run in root context
                     "#!/usr/bin/env bash",
+                    download_and_extract_scripts,
                     'BIG_IQ_PWD="$1"',
                     "mount -o remount,rw /usr",
                     # Run configuration
                     Join(" ", [
                         "/config/cloud/configure-bigiq.py --LICENSE_KEY",
                         Ref(t.parameters["licenseKey1"]),
-                        "--MASTER_PASSPHRASE Ref(t.parameters["masterPassphrase"]",
+                        "--MASTER_PASSPHRASE",
+                        Ref(t.parameters["masterPassphrase"]),
                         "--TIMEOUT_SEC 1200"
                     ]),
                     # Wait for restart to take effect, should be unnecessary since the setup wizard has resequenced to
@@ -138,7 +140,8 @@ def define_instance_init_files (t, args):
                     Join(" ", [
                         "/config/cloud/configure-bigiq.py --LICENSE_KEY",
                         Ref(t.parameters["licenseKey2"]),
-                        "--MASTER_PASSPHRASE Ref(t.parameters["masterPassphrase"]",
+                        "--MASTER_PASSPHRASE",
+                        Ref(t.parameters["masterPassphrase"]),
                         "--TIMEOUT_SEC 1200",
                         "--NODE_TYPE DCD"
                     ])
@@ -174,9 +177,7 @@ def define_interface ():
                     "Parameters": [
                         "vpcCidrBlock",
                         "subnet1CidrBlock",
-                        "subnet2CidrBlock",
-                        "subnet1Az",
-                        "subnet2Az"
+                        "subnet1Az"
                     ]
                 }, {
                     "Label": {
@@ -288,14 +289,8 @@ def define_param_labels ():
         "subnet1Az": {
             "default": "Subnet AZ1"
         },
-        "subnet2Az": {
-            "default": "Subnet AZ2"
-        },
         "subnet1CidrBlock": {
             "default": "Subnet 1 CIDR Block"
-        },
-        "subnet2CidrBlock": {
-            "default": "Subnet 2 CIDR Block"
         }
     }
 
@@ -303,7 +298,7 @@ def define_param_labels ():
 def define_parameters (t):
     t.add_parameter(Parameter("instanceType",
         AllowedValues = [
-            "m4.2xlarge", "m4.4xlarge"
+            "m4.2xlarge", "m4.4xlarge", "m4.8xlarge"
         ],
         ConstraintDescription = "Must be a valid EC2 instance type for BIG-IQ",
         Default = "m4.2xlarge",
@@ -327,6 +322,7 @@ def define_parameters (t):
     t.add_parameter(Parameter("masterPassphrase",
         ConstraintDescription = "Verify your Master Key Passphrase 16-characters min.",
         Description = "F5 BIG-IQ Master Key Passphrase",
+        Default = "Thisisthemasterkey#1234",
         MaxLength = 255,
         MinLength = 1,
         Type = "String"
@@ -357,24 +353,11 @@ def define_parameters (t):
         Description = "Name of an Availability Zone in this Region",
         Type = "AWS::EC2::AvailabilityZone::Name"
     ))
-    t.add_parameter(Parameter("subnet2Az",
-        Description = "Name of an Availability Zone in this Region which is different than Subnet AZ1",
-        Type = "AWS::EC2::AvailabilityZone::Name"
-    ))
     t.add_parameter(Parameter("subnet1CidrBlock",
         AllowedPattern = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
         ConstraintDescription = "Must be a valid IP CIDR range of the form x.x.x.x/x.",
         Default = "10.1.1.0/24",
-        Description = " The CIDR block for the second subnet which is compatible with the VPC CIDR block",
-        MaxLength = 18,
-        MinLength = 9,
-        Type = "String"
-    ))
-    t.add_parameter(Parameter("subnet2CidrBlock",
-        AllowedPattern = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
-        ConstraintDescription = "Must be a valid IP CIDR range of the form x.x.x.x/x.",
-        Default = "10.1.2.0/24",
-        Description = " The CIDR block for the second subnet which is compatible with the VPC CIDR block",
+        Description = " The CIDR block for the first subnet which is compatible with the VPC CIDR block",
         MaxLength = 18,
         MinLength = 9,
         Type = "String"
@@ -408,18 +391,6 @@ def define_networking (t):
         )
     )
 
-    t.add_resource(
-        Subnet(
-            "Subnet2",
-            CidrBlock = Ref(t.parameters["subnet2CidrBlock"]),
-            VpcId = Ref(t.resources["VPC"]),
-            AvailabilityZone = Ref(t.parameters["subnet2Az"]),
-            Tags = Tags(
-                Name = Join(" ", [ "Big-IQ Subnet 2:", Ref("AWS::StackName") ])
-            )
-        )
-    )
-
     t.add_resource(RouteTable(
         "RouteTable1",
         VpcId = Ref(t.resources["VPC"]),
@@ -440,12 +411,6 @@ def define_networking (t):
         "Subnet1RouteTableAssociation",
         SubnetId = Ref(t.resources["Subnet1"]),
         RouteTableId = Ref(t.resources["RouteTable1"])
-    ))
-
-    t.add_resource(SubnetRouteTableAssociation(
-        "Subnet2RouteTableAssociation",
-        SubnetId = Ref(t.resources["Subnet2"]),
-        RouteTableId = Ref(t.resources["RouteTable2"])
     ))
 
     t.add_resource(InternetGateway(

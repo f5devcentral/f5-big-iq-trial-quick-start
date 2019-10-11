@@ -27,11 +27,12 @@ To deploy this CFT in AWS, complete the following steps.
 4. In the CloudFormation Template (CFT), populate this information:
 
    * Stack name (must be fewer than 25 characters)
-   * Subnets in each availability zone (AZ1 and AZ2) (ensure they are not the same)
+   * Subnet
    * If you did not do it previously, accept the BIG-IQ license terms by visiting the URLs specified,
    clicking **Continue to Subscribe**, and accepting terms
    * BIG-IQ Centralized Management (CM) License Key (from F5 trial **BIG-IQ Console Node**)
    * BIG-IQ Data Collection Device (DCD) License Key (from F5 trial **BIG-IQ Data Collection Device**)
+   * BIG-IQ Master Key Passphrase
    * SSH Key (your AWS key pair name)
 
    *Expected time: ~5 min*
@@ -70,9 +71,15 @@ To deploy this CFT in AWS, complete the following steps.
 8. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
 
    * Use the username `admin`.
-   * Click the **Devices** tab > **BIG-IP DEVICES**. 
+   * Click the **Devices** tab > **BIG-IP DEVICES**. Click on **Add Device(s)**.
+
+9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-0-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
+
+    * Manage your existing BIG-IP(s) on premise (need VPN or AWS Direct Connect) or in the cloud.
+    * Don't have BIG-IP yet? stand one up in AWS and use one of the [F5 template](https://github.com/F5Networks/f5-aws-cloudformation)
 
 For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0).
+
 
 Security instructions
 ---------------------
@@ -99,7 +106,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2014-2019 F5 Networks Inc.
+Copyright 2014-2020 F5 Networks Inc.
 
 ### License
 

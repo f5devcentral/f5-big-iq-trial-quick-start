@@ -20,8 +20,6 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.0.0%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
    
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.0.0%2Fazure%2Fexperimental%2Fazuredeploy-with-exisiting-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
-   
 5. In the ARM Template, populate this information:
 
    * Resource group (select existing or create new)
@@ -30,6 +28,7 @@ To deploy this ARM template in Azure cloud, complete the following steps.
    * Password / sshPublicKey for the BIG-IQ Data Collection Device (DCD) and Centralized Management (CM) instances (you will connect to the instances by using these credentials)
    * BIG-IQ password (management console's password)
    * License keys for CM and DCD
+   * BIG-IQ Master Key Passphrase
    * Location (the default is the resource group's location; change if you want to deploy the resources in another location)
 
 6. Accept the terms and conditions and launch the cloud deployment. 
@@ -39,7 +38,12 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 7. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
 
    * Use the username `admin`.
-   * Click the **Devices** tab > **BIG-IP DEVICES**. 
+   * Click the **Devices** tab > **BIG-IP DEVICES**. Click on **Add Device(s)**.
+
+8. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-0-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
+
+    * Manage your existing BIG-IP(s) on premise (need VPN or Azure Direct Connect) or in the cloud.
+    * Don't have BIG-IP yet? stand one up in Azure and use one of the [F5 template](https://github.com/F5Networks/f5-azure-arm-templates)
 
 For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0).
 
@@ -65,7 +69,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2014-2019 F5 Networks Inc.
+Copyright 2014-2020 F5 Networks Inc.
 
 ### License
 

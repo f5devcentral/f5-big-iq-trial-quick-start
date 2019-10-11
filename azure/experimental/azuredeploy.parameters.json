@@ -15,7 +15,7 @@
             "value": null
         },
         "instanceType": {
-            "value": "Standard_D4s_v3"
+            "value": "Standard_D8s_v3"
         },
         "bigIqVersion": {
             "value": "7.0.001000"
