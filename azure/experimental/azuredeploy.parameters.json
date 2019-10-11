@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "adminPasswordOrKey": {
+            "value": null
+        },
+        "bigIQPassword": {
+            "value": null
+        },
+        "instanceType": {
+            "value": "Standard_D4s_v3"
+        },
+        "bigIqVersion": {
+            "value": "7.0.001000"
+        },
+        "bigIqCMLicenseKey1": {
+            "value": ""
+        },
+        "bigIqDCDLicenseKey2": {
+            "value": ""
+        },
+        "bigIQMasterPassphraseKey": {
+            "value": ""
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "restrictedSrcAddress": {
+            "value": "*"
+        },
+        "mgmtSubnetPrefix": {
+            "value": "10.1.1.0/24"
+        },
+        "intSubnetPrefix": {
+            "value": "10.1.2.0/24"
+        },
+        "vnetAddressPrefix": {
+            "value": "10.1.0.0/16"
+        },
+        "dcdInstanceName": {
+            "value": "demo-trial-dcd"
+        },
+        "cmInstanceName": {
+            "value": "demo-trial-cm"
+        },
+        "customImage": {
+            "value": "OPTIONAL"
+        },
+        "tagValues": {
+            "value": {
+                "application": "BIGIQ"
+            }
+        }
+    }
+}
