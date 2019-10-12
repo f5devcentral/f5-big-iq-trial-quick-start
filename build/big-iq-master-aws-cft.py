@@ -80,7 +80,7 @@ def define_instance_init_files (t, args):
                     "mount -o remount,rw /usr",
                     # Run configuration
                     Join(" ", [
-                        "/config/cloud/configure-bigiq.py --LICENSE_KEY",
+                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
                         Ref(t.parameters["licenseKey1"]),
                         "--MASTER_PASSPHRASE",
                         Ref(t.parameters["masterPassphrase"]),
@@ -140,7 +140,7 @@ def define_instance_init_files (t, args):
                         " && tmsh save sys config && set-basic-auth on"
                     ]),
                     Join(" ", [
-                        "/config/cloud/configure-bigiq.py --LICENSE_KEY",
+                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
                         Ref(t.parameters["licenseKey2"]),
                         "--MASTER_PASSPHRASE",
                         Ref(t.parameters["masterPassphrase"]),

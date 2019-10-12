@@ -241,7 +241,7 @@
                                                 "Fn::Join": [
                                                     " ",
                                                     [
-                                                        "/config/cloud/configure-bigiq.py --LICENSE_KEY",
+                                                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
                                                         {
                                                             "Ref": "licenseKey1"
                                                         },
@@ -461,7 +461,7 @@
                                                 "Fn::Join": [
                                                     " ",
                                                     [
-                                                        "/config/cloud/configure-bigiq.py --LICENSE_KEY",
+                                                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
                                                         {
                                                             "Ref": "licenseKey2"
                                                         },
