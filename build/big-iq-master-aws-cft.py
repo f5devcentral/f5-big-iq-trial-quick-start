@@ -105,7 +105,7 @@ def define_instance_init_files (t, args):
                         " && tmsh save sys config"
                     ]),
                     Join(" ", [
-                        "/config/cloud/activate-dcd-services.py --SERVICES asm",
+                        "/config/cloud/activate-dcd-services.py --SERVICES asm ",
                         "--DCD_IP_ADDRESS",
                         GetAtt("BigIqDcdEth0", "PrimaryPrivateIpAddress")
                     ]),

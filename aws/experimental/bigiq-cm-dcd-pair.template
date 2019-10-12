@@ -320,7 +320,7 @@
                                                 "Fn::Join": [
                                                     " ",
                                                     [
-                                                        "/config/cloud/activate-dcd-services.py --SERVICES asm",
+                                                        "/config/cloud/activate-dcd-services.py --SERVICES asm access dos websafe ipsec afm",
                                                         "--DCD_IP_ADDRESS",
                                                         {
                                                             "Fn::GetAtt": [

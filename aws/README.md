@@ -66,7 +66,7 @@ To deploy this CFT in AWS, complete the following steps.
    * The password must match the password you used on the BIG-IQ DCD instance in the previous step.
    * Let the scripts finish before moving to the next step.
 
-   *Expected time: ~30 min*
+   *Expected time: ~5 min*
 
 8. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
 
