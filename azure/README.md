@@ -23,6 +23,8 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 4. Launch the *trial stack* template by right-clicking this button and choosing **Open link in new window**:
 
    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.0.0%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
+
+    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.0.0%2Fazure%2Fexperimental%2Fazure-deploy-with-existing-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
    
 5. In the ARM Template, populate this information:
 
