@@ -3,10 +3,14 @@ BIG-IQ Centralized Management Trial Quick Start - Azure
 
 **Note:** This template uses BIG-IQ 7.0.0
 
+![Deployment Diagram](../images/diagram-bigiq-azure.png)
+
 Instructions for Azure
 ----------------------
 
 To deploy this ARM template in Azure cloud, complete the following steps.
+
+*Expected time: ~15 min*
 
 1. To get a BIG-IQ trial license, go to [F5 Cloud Edition Trial](https://f5.com/products/trials/product-trials).
 
@@ -33,14 +37,14 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
 6. Accept the terms and conditions and launch the cloud deployment. 
 
-   *Expected time: ~15 min*
+7. Monitor the deployment of the template. Go to your **Resource Group > Deployments**. Wait until the BIG-IQ instances are fully deployed.
 
-7. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
+8. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
 
    * Use the username `admin`.
    * Click the **Devices** tab > **BIG-IP DEVICES**. Click on **Add Device(s)**.
 
-8. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-0-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
+9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-0-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
     * Manage your existing BIG-IP(s) on premise (need VPN or Azure Direct Connect) or in the cloud.
     * Don't have BIG-IP yet? stand one up in Azure and use one of the [F5 template](https://github.com/F5Networks/f5-azure-arm-templates)

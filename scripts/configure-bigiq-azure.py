@@ -140,7 +140,7 @@ def set_management_address (host_name = DEFAULT_HOSTNAME):
 def configure_services ():
     req(
         BIGIQ_REST_URL + "tm/sys/dns",
-        json={"nameServers":["168.63.129.16","8.8.8.8"],"search":["azure.com"]},
+        json={"nameServers":["168.63.129.16","8.8.8.8"],"search":["cloudapp.net"]},
         method="PATCH"
     )
 

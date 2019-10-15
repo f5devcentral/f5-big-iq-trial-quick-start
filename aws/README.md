@@ -3,12 +3,16 @@ BIG-IQ Centralized Management Trial Quick Start - AWS
 
 **Note:** This template uses BIG-IQ 7.0.0
 
+![Deployment Diagram](../images/diagram-bigiq-aws.png)
+
 Instructions for AWS
 --------------------
 
 To deploy this CFT in AWS, complete the following steps.
 
-**Note:** This template is not supported in the Paris region and in AWS GovCloud.
+*Expected time: ~15 min*
+
+**Note:** This template is not supported in the Paris region, AWS GovCloud and AWS China.
 
 1. To get a BIG-IQ trial license, go to [F5 Cloud Edition Trial](https://f5.com/products/trials/product-trials).
 
@@ -35,14 +39,10 @@ To deploy this CFT in AWS, complete the following steps.
    * BIG-IQ Master Key Passphrase
    * SSH Key (your AWS key pair name)
 
-   *Expected time: ~5 min*
-
 5. Open the [EC2 console](https://console.aws.amazon.com/ec2/v2/home) and wait until the BIG-IQ instances are fully deployed.
 
    * Instance State: running
    * Status Checks: 2/2 checks passed
-
-   *Expected time: ~5 min*
 
 6. Use admin user and your AWS SSH key to SSH into the BIG-IQ DCD instance, then execute the following commands:
 
@@ -54,8 +54,6 @@ To deploy this CFT in AWS, complete the following steps.
    * When prompted, enter a password for BIG-IQ. You will use this same password again on the BIG-IQ CM instance. [Details on prohibited characters](https://support.f5.com/csp/article/K2873).
    * Let the scripts finish before moving to the next step.
 
-   *Expected time: ~2 min*
-
 7. Use admin user and your AWS SSH key to SSH into the BIG-IQ CM instance, then execute the following commands:
 
    ```
@@ -65,8 +63,6 @@ To deploy this CFT in AWS, complete the following steps.
 
    * The password must match the password you used on the BIG-IQ DCD instance in the previous step.
    * Let the scripts finish before moving to the next step.
-
-   *Expected time: ~5 min*
 
 8. Open BIG-IQ CM in a web browser by using the public IP address with https, for example: ``https://<public_ip>``
 
