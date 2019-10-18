@@ -86,8 +86,8 @@
             "metadata": {
               "description": "Location for all resources."
             }
-          },
-		  "vnetName": {
+        },
+        "vnetName": {
             "metadata": {
                 "description": "The name of the existing virtual network to which you want to connect the BIG-IQ VEs."
             },
@@ -116,33 +116,6 @@
             "type": "string",
             "metadata": {
                 "description": " The IP address range used to SSH and access managment GUI on the BIG-IQ instances"
-            }
-        },
-        "mgmtSubnetPrefix": {
-            "defaultValue": "10.1.1.0/24",
-            "minLength": 9,
-            "maxLength": 18,
-            "type": "string",
-            "metadata": {
-                "description": " The address range for the first subnet which is compatible with the Virtual Network,Must be a valid IP address range of the form x.x.x.x/x."
-            }
-        },
-        "intSubnetPrefix": {
-            "defaultValue": "10.1.2.0/24",
-            "minLength": 9,
-            "maxLength": 18,
-            "type": "string",
-            "metadata": {
-                "description": " The address range for the second subnet which is compatible with the VPC CIDR block,Must be a valid IP address range of the form x.x.x.x/x."
-            }
-        },
-        "vnetAddressPrefix": {
-            "defaultValue": "10.1.0.0/16",
-            "minLength": 9,
-            "maxLength": 18,
-            "type": "string",
-            "metadata": {
-                "description": " The vnet address block  , Must be a valid IP in range of the form x.x.x.x/x."
             }
         },
         "dcdInstanceName": {
@@ -220,7 +193,6 @@
         "cmInstanceName": "[toLower(parameters('cmInstanceName'))]",
         "virtualNetworkName": "[parameters('vnetName')]",
         "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-        "vnetAddressPrefix": "[parameters('vnetAddressPrefix')]",
         "publicIPAddressType": "Static",
         "extPublicIPAddressName": "[concat('BIG-IQ-DCD-IP-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "dcdPublicIPAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('extPublicIPAddressName'))]",
@@ -229,12 +201,8 @@
         "mgmtNicName2": "[concat('BIG-IQ-DCD2-NetworkInterface-' , variables('resourceGroupName') ,'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "intNicName": "[concat('BIG-IQ-CM-NetworkInterface-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "intNicName2": "[concat('BIG-IQ-CM2-NetworkInterface-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
-        "mgmtSubnetName": "[parameters('mgmtSubnetName')]",
-        "mgmtSubnetId": "[concat(variables('vnetId'), '/subnets/', variables('mgmtSubnetName'))]",
         "mgmtNsgName": "[concat('BIG-IQ-SG-', variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
-        "mgmtNsgID": "[resourceId('Microsoft.Network/networkSecurityGroups/',variables('mgmtNsgName'))]",
-        "intSubnetName": "[parameters('internalSubnetName')]",
-        "intSubnetId": "[concat(variables('vnetId'), '/subnets/', variables('intsubnetName'))]",
+        "mgmtNsgID": "[resourceId('Microsoft.Network/networkSecurityGroups/',variables('mgmtNsgName'))]",      
         "intpublicIPAddressName": "[concat('BIG-IQ-CM-IP-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "cmPublicIPAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('intPublicIPAddressName'))]",
         "tagValues": "[parameters('tagValues')]",
@@ -390,7 +358,7 @@
                             "direction": "Inbound",
                             "priority": 106,
                             "protocol": "Tcp",
-                            "sourceAddressPrefix": "[parameters('vnetAddressPrefix')]",
+                            "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').addressSpace.addressPrefixes[0]]",
                             "sourcePortRange": "1"
                         }
                     }
@@ -413,7 +381,7 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[variables('mgmtSubnetId')]"
+                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[0].id]"
                             }
                         }
                     }
@@ -443,7 +411,7 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[variables('intSubnetId')]"
+                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[1].id]"
                             }
                         }
                     }
@@ -470,7 +438,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[variables('mgmtSubnetId')]"
+                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[0].id]"
                             }
                         }
                     }
@@ -497,7 +465,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[variables('intSubnetId')]"
+                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[1].id]"
                             }
                         }
                     }

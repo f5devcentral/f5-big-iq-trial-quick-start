@@ -65,6 +65,22 @@ Tear down instructions
 
 If you want to preserve other resouces in the group, delete only the resources that were created. You can find these resources under **Resource Group** > **Deployments**. Otherwise, you can delete the entire resource group.
 
+Miscellaneous
+-------------
+
+- In case you need to restore the BIG-IQ system to factory default settings, follow [K15886](https://support.f5.com/csp/article/K15886) article.
+
+- Disable SSL authentication for SSG or VE creation in VMware (**LAB/POC only**):
+
+  ```
+  echo >> /var/config/orchestrator/orchestrator.conf
+  echo 'VALIDATE_CERTS = "no"' >> /var/config/orchestrator/orchestrator.conf
+  bigstart restart gunicorn
+  bigstart restart restjavad
+  ```
+
+  *Note: This parameter added to the orchestrator.conf is NOT preserves during BIG-IQ upgrade.*
+
 Troubleshooting
 ---------------
 
