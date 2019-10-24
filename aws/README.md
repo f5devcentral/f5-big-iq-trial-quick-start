@@ -16,7 +16,7 @@ To deploy this CFT in AWS, complete the following steps.
 
 1. To get a BIG-IQ trial license, go to [F5 Trial](https://f5.com/products/trials/product-trials).
 
-   Select **BIG-IP Cloud Edition - Advanced Web Application Firewall**
+   Select **BIG-IP VE and BIG-IQ**
 
 2. Subscribe and accept the Terms and Conditions for these F5 products:
 
