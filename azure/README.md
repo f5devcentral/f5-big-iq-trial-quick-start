@@ -12,9 +12,9 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
 *Expected time: ~15 min*
 
-1. To get a BIG-IQ trial license, go to [F5 Cloud Edition Trial](https://f5.com/products/trials/product-trials).
+1. To get a BIG-IQ trial license, go to [F5 Trial](https://f5.com/products/trials/product-trials).
 
-   Select **BIG-IP Cloud Edition - Advanced Web Application Firewall**
+   Select **BIG-IP VE and BIG-IQ**
 
 2. Enable programmatic deployment for these F5 products:
 
