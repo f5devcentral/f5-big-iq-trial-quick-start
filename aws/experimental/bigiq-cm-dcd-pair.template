@@ -45,7 +45,13 @@
             },
             "us-west-2": {
                 "bigiq": "ami-033094a3b2f492fae"
-            }
+            },
+            "cn-north-1": {
+                "bigiq": "ami-05b8a3f9f3adb3f4b"
+            },
+            "cn-northwest-1": {
+                "bigiq": "ami-0a6403c116238a8a9"
+            }  
         }
     },
     "Metadata": {
@@ -366,7 +372,8 @@
                         "DeviceName": "/dev/xvda",
                         "Ebs": {
                             "DeleteOnTermination": "true",
-                            "VolumeType": "gp2"
+                            "VolumeType": "gp2",
+                            "VolumeSize" : "500"
                         }
                     }
                 ],
@@ -534,7 +541,8 @@
                         "DeviceName": "/dev/xvda",
                         "Ebs": {
                             "DeleteOnTermination": "true",
-                            "VolumeType": "gp2"
+                            "VolumeType": "gp2",
+                            "VolumeSize" : "500"
                         }
                     }
                 ],
