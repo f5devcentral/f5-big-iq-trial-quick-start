@@ -1,3 +1,5 @@
+#! /usr/local/bin/python2.7
+
 import requests
 from requests import ConnectionError
 import sys

@@ -16,7 +16,7 @@ If your BIG-IPs are on premise in your Data Center, you will need a VPN or Direc
 
 ### Copyright
 
-Copyright 2014-2020 F5 Networks Inc.
+Copyright 2020 F5 Networks Inc.
 
 ### License
 

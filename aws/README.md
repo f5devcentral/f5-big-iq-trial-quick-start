@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start - AWS
 =====================================================
 
-**Note:** This template uses BIG-IQ 7.0.0
+**Note:** This template uses BIG-IQ 7.1.0
 
 ![Deployment Diagram](../images/diagram-bigiq-aws.png)
 
@@ -24,9 +24,9 @@ To deploy this CFT in AWS, complete the following steps.
 
 3. Launch the *trial stack* template by right-clicking this button and choosing **Open link in new window**:
 
-   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F7.0.0%2Fbigiq-cm-dcd-pair.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (new VPC)
+   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F7.1.0%2Fbigiq-cm-dcd-pair.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (new VPC)
 
-   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F7.0.0%2Fbigiq-cm-dcd-pair-existing-vpc.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (existing VPC)
+   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F7.1.0%2Fbigiq-cm-dcd-pair-existing-vpc.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (existing VPC)
 
 4. In the CloudFormation Template (CFT), populate this information:
 
@@ -69,12 +69,12 @@ To deploy this CFT in AWS, complete the following steps.
    * Use the username `admin`.
    * Click the **Devices** tab > **BIG-IP DEVICES**. Click on **Add Device(s)**.
 
-9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-0-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
+9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-1-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
     * Manage your existing BIG-IP(s) on premise (need VPN or AWS Direct Connect) or in the cloud.
     * Don't have BIG-IP yet? stand one up in AWS and use one of the [F5 template](https://github.com/F5Networks/f5-aws-cloudformation)
 
-For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.0.0).
+For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0).
 
 
 Security instructions
@@ -102,7 +102,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2014-2020 F5 Networks Inc.
+Copyright 2020 F5 Networks Inc.
 
 ### License
 

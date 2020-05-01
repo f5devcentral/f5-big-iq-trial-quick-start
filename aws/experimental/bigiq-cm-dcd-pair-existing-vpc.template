@@ -1,57 +1,51 @@
 {
     "Mappings": {
         "AmiRegionMap": {
-            "ap-northeast-1": {
-                "bigiq": "ami-03b922910324db7aa"
-            },
-            "ap-northeast-2": {
-                "bigiq": "ami-0379bc3d5fbd5d2b6"
+            "eu-north-1": {
+                "bigiq": "ami-071a6a2df52bc56a8"
             },
             "ap-south-1": {
-                "bigiq": "ami-0102bd6934987f9b4"
-            },
-            "ap-southeast-1": {
-                "bigiq": "ami-00db427a9fb8bd623"
-            },
-            "ap-southeast-2": {
-                "bigiq": "ami-0916a14783f29fb52"
-            },
-            "ca-central-1": {
-                "bigiq": "ami-0190f71dcb9cc1f9f"
-            },
-            "eu-central-1": {
-                "bigiq": "ami-01fcae3ec9761cff5"
-            },
-            "eu-north-1": {
-                "bigiq": "ami-ae9913d0"
-            },
-            "eu-west-1": {
-                "bigiq": "ami-046af572233671cec"
+                "bigiq": "ami-030374e6b7348a998"
             },
             "eu-west-2": {
-                "bigiq": "ami-02fa9c0cf70261667"
+                "bigiq": "ami-08c6e4391ba6d9419"
+            },
+            "eu-west-1": {
+                "bigiq": "ami-0439700f93f68f34c"
+            },
+            "ap-northeast-2": {
+                "bigiq": "ami-01a5472697d61bf04"
+            },
+            "ap-northeast-1": {
+                "bigiq": "ami-0b21d77b676997090"
             },
             "sa-east-1": {
-                "bigiq": "ami-054f641e417cb06d7"
+                "bigiq": "ami-02244432edf2bae7e"
+            },
+            "ca-central-1": {
+                "bigiq": "ami-021f348202c9dcce8"
+            },
+            "ap-southeast-1": {
+                "bigiq": "ami-04bf2fee50bd18f36"
+            },
+            "ap-southeast-2": {
+                "bigiq": "ami-073c7de9ab30c78f5"
+            },
+            "eu-central-1": {
+                "bigiq": "ami-01c24610628c036d2"
             },
             "us-east-1": {
-                "bigiq": "ami-09cd0faf029ac7746"
+                "bigiq": "ami-02664e8c2fff18875"
             },
             "us-east-2": {
-                "bigiq": "ami-08ae7e928d8bda90a"
+                "bigiq": "ami-08c0231dad60effde"
             },
             "us-west-1": {
-                "bigiq": "ami-05e14d844b0b28686"
+                "bigiq": "ami-04ef4e09d787ce886"
             },
             "us-west-2": {
-                "bigiq": "ami-033094a3b2f492fae"
-            },
-            "cn-north-1": {
-                "bigiq": "ami-05b8a3f9f3adb3f4b"
-            },
-            "cn-northwest-1": {
-                "bigiq": "ami-0a6403c116238a8a9"
-            }  
+                "bigiq": "ami-0212d585db0ad65be"
+            }
         }
     },
     "Metadata": {
@@ -240,22 +234,52 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.0.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
-                                            "mount -o remount,rw /usr",
+                                            {
+                                                "Fn::Join": [
+                                                    "",
+                                                    [
+                                                        "tmsh modify auth user admin",
+                                                        " password \"$BIG_IQ_PWD\"",
+                                                        " && tmsh save sys config"
+                                                    ]
+                                                ]
+                                            },
                                             {
                                                 "Fn::Join": [
                                                     " ",
                                                     [
-                                                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
+                                                        "/config/cloud/bigiq-config.py --licensekey",
                                                         {
                                                             "Ref": "licenseKey1"
                                                         },
-                                                        "--MASTER_PASSPHRASE",
+                                                        "--masterkey",
                                                         {
                                                             "Ref": "masterPassphrase"
                                                         },
-                                                        "--TIMEOUT_SEC 1200"
+                                                        "--personality big_iq",
+                                                        "--hostname bigiq-cm.f5trial",
+                                                        "--managementIpAddress",
+                                                        {
+                                                            "Fn::GetAtt": [
+                                                                "BigIqCmEth0",
+                                                                "PrimaryPrivateIpAddress"
+                                                            ]
+                                                        },
+                                                        "--discoveryAddress",
+                                                        {
+                                                            "Fn::GetAtt": [
+                                                                "BigIqCmEth0",
+                                                                "PrimaryPrivateIpAddress"
+                                                            ]
+                                                        },
+                                                        "--timezone America/Los_Angeles",
+                                                        "--ntp_servers 169.254.169.123",
+                                                        "--dns_servers 169.254.169.253",
+                                                        "--user admin",
+                                                        "--password \"$BIG_IQ_PWD\""
                                                     ]
                                                 ]
                                             },
@@ -283,18 +307,9 @@
                                                     ]
                                                 ]
                                             },
+                                            "sleep 10",
                                             "chmod +x /config/cloud/import-as3-templates.sh",
                                             "/config/cloud/import-as3-templates.sh",
-                                            {
-                                                "Fn::Join": [
-                                                    "",
-                                                    [
-                                                        "tmsh modify auth user admin",
-                                                        " password \"$BIG_IQ_PWD\"",
-                                                        " && tmsh save sys config"
-                                                    ]
-                                                ]
-                                            },
                                             {
                                                 "Fn::Join": [
                                                     " ",
@@ -451,8 +466,8 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.0.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
-                                            "/config/cloud/wait-for-rjd.py",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
                                             {
                                                 "Fn::Join": [
@@ -460,7 +475,7 @@
                                                     [
                                                         "tmsh modify auth user admin",
                                                         " password \"$BIG_IQ_PWD\"",
-                                                        " && tmsh save sys config && set-basic-auth on"
+                                                        " && tmsh save sys config"
                                                     ]
                                                 ]
                                             },
@@ -468,16 +483,35 @@
                                                 "Fn::Join": [
                                                     " ",
                                                     [
-                                                        "/config/cloud/configure-bigiq-aws.py --LICENSE_KEY",
+                                                        "/config/cloud/bigiq-config.py --licensekey",
                                                         {
                                                             "Ref": "licenseKey2"
                                                         },
-                                                        "--MASTER_PASSPHRASE",
+                                                        "--masterkey",
                                                         {
                                                             "Ref": "masterPassphrase"
                                                         },
-                                                        "--TIMEOUT_SEC 1200",
-                                                        "--NODE_TYPE DCD"
+                                                        "--personality logging_node",
+                                                        "--hostname bigiq-dcd.f5trial",
+                                                        "--managementIpAddress",
+                                                        {
+                                                            "Fn::GetAtt": [
+                                                                "BigIqDcdEth0",
+                                                                "PrimaryPrivateIpAddress"
+                                                            ]
+                                                        },
+                                                        "--discoveryAddress",
+                                                        {
+                                                            "Fn::GetAtt": [
+                                                                "BigIqDcdEth0",
+                                                                "PrimaryPrivateIpAddress"
+                                                            ]
+                                                        },
+                                                        "--timezone America/Los_Angeles",
+                                                        "--ntp_servers 169.254.169.123",
+                                                        "--dns_servers 169.254.169.253",
+                                                        "--user admin",
+                                                        "--password \"$BIG_IQ_PWD\""
                                                     ]
                                                 ]
                                             }
