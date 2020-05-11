@@ -36,6 +36,11 @@ To deploy this ARM template in Azure cloud, complete the following steps.
    * BIG-IQ Centralized Management (CM) License Key (from F5 trial **BIG-IQ Console Node**)
    * BIG-IQ Data Collection Device (DCD) License Key (use **skipLicense:true**)
    * BIG-IQ Master Key Passphrase
+      * 16 characters or longer
+      * 1 or more capital letters
+      * 1 or more lowercase letters
+      * 1 or more numbers
+      * 1 or more special characters
    * Location (the default is the resource group's location; change if you want to deploy the resources in another location)
 
 6. Accept the terms and conditions and launch the cloud deployment. 

@@ -37,6 +37,11 @@ To deploy this CFT in AWS, complete the following steps.
    * BIG-IQ Centralized Management (CM) License Key (from F5 trial **BIG-IQ Console Node**)
    * BIG-IQ Data Collection Device (DCD) License Key (use **skipLicense:true**)
    * BIG-IQ Master Key Passphrase
+      * 16 characters or longer
+      * 1 or more capital letters
+      * 1 or more lowercase letters
+      * 1 or more numbers
+      * 1 or more special characters
    * SSH Key (your AWS key pair name)
 
 5. Open the [EC2 console](https://console.aws.amazon.com/ec2/v2/home) and wait until the BIG-IQ instances are fully deployed.
