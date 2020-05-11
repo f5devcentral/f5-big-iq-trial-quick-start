@@ -60,7 +60,7 @@
             "maxLength": 255,
             "type": "string",
             "metadata": {
-                "description": "F5 BIG-IQ CM license key "
+                "description": "F5 BIG-IQ CM license key"
             }
         },
         "bigIqDCDLicenseKey2": {
@@ -78,13 +78,6 @@
             "type": "string",
             "metadata": {
                 "description": "F5 BIG-IQ Master key"
-            }
-        },
-        "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-              "description": "Location for all resources."
             }
         },
         "vnetName": {
@@ -157,7 +150,7 @@
         "computeApiVersion": "2018-10-01",
         "networkApiVersion": "2018-08-01",
         "storageApiVersion": "2017-10-01",
-        "location": "[parameters('location')]",
+        "location": "[resourceGroup().location]",
         "adminPasswordOrKey": "[parameters('adminPasswordOrKey')]",
         "linuxConfiguration": {
             "disablePasswordAuthentication": true,
@@ -192,7 +185,9 @@
         "dcdInstanceName": "[toLower(parameters('dcdInstanceName'))]",
         "cmInstanceName": "[toLower(parameters('cmInstanceName'))]",
         "virtualNetworkName": "[parameters('vnetName')]",
-        "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+        "mgmtSubnetName": "[parameters('mgmtSubnetName')]",
+        "internalSubnetName": "[parameters('internalSubnetName')]",
+        "vnetId": "[resourceId(parameters('vnetResourceGroupName'),'Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
         "publicIPAddressType": "Static",
         "extPublicIPAddressName": "[concat('BIG-IQ-DCD-IP-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "dcdPublicIPAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('extPublicIPAddressName'))]",
@@ -359,7 +354,7 @@
                             "direction": "Inbound",
                             "priority": 106,
                             "protocol": "Tcp",
-                            "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').addressSpace.addressPrefixes[0]]",
+                            "sourceAddressPrefix": "[reference(variables('vnetId'),'2019-04-01').addressSpace.addressPrefixes[0]]",
                             "sourcePortRange": "1"
                         }
                     }
@@ -382,7 +377,7 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[0].id]"
+                                "id": "[concat(variables('vnetId'), '/subnets/', variables('mgmtSubnetName'))]"
                             }
                         }
                     }
@@ -412,7 +407,7 @@
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[1].id]"
+                                "id": "[concat(variables('vnetId'), '/subnets/', variables('mgmtSubnetName'))]"
                             }
                         }
                     }
@@ -439,7 +434,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[0].id]"
+                                "id": "[concat(variables('vnetId'), '/subnets/', variables('internalSubnetName'))]"
                             }
                         }
                     }
@@ -466,7 +461,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[reference(resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName')),'2019-04-01').subnets[1].id]"
+                                "id": "[concat(variables('vnetId'), '/subnets/', variables('internalSubnetName'))]"
                             }
                         }
                     }
