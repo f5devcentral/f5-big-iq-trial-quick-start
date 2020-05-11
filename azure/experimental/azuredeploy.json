@@ -60,15 +60,16 @@
             "maxLength": 255,
             "type": "string",
             "metadata": {
-                "description": "F5 BIG-IQ CM license key "
+                "description": "F5 BIG-IQ CM license key."
             }
         },
         "bigIqDCDLicenseKey2": {
             "minLength": 1,
             "maxLength": 255,
+            "defaultValue": "skipLicense:true",
             "type": "string",
             "metadata": {
-                "description": "F5 BIG-IQ DCD license key"
+                "description": "F5 BIG-IQ DCD license key."
             }
         },
         "bigIQMasterPassphraseKey": {
@@ -77,7 +78,7 @@
             "maxLength": 255,
             "type": "string",
             "metadata": {
-                "description": "F5 BIG-IQ Master key"
+                "description": "F5 BIG-IQ Master Key Passphrase 16-characters min."
             }
         },
         "location": {
@@ -91,7 +92,7 @@
             "defaultValue": "*",
             "type": "string",
             "metadata": {
-                "description": " The IP address range used to SSH and access managment GUI on the BIG-IQ instances"
+                "description": " The IP address range used to SSH and access managment GUI on the BIG-IQ instances."
             }
         },
         "mgmtSubnetPrefix": {

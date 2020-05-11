@@ -24,7 +24,7 @@
             "value": ""
         },
         "bigIqDCDLicenseKey2": {
-            "value": ""
+            "value": "skipLicense:true"
         },
         "bigIQMasterPassphraseKey": {
             "value": ""

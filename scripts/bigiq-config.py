@@ -75,29 +75,40 @@ class Setup:
             return
 
         print("Setting license to " + str(license_key))
-        result = self.session.post(
-            Setup.BASE_URL + "/mgmt/setup/license/activate",
-            json={
-                "baseRegKey": license_key,
-                "addOnKeys":[],
-                "activationMethod":"AUTOMATIC"
-            })
-        result.raise_for_status()
-        result_body = result.json()
-        print(result_body)
-        if "NEED_EULA_ACCEPT" in result_body.get("status"):
-            print("Accepting EULA")
 
-            accept_eula_body = {
-                "baseRegKey": license_key,
-                "dossier": result_body.get("dossier"),
-                "eulaText": result_body.get("eulaText")
-            }
+        if license_key == "skipLicense:true":
             result = self.session.post(
-                Setup.BASE_URL + "/mgmt/setup/license/accept-eula",
-                json=accept_eula_body
-            )
+                Setup.BASE_URL + "/mgmt/setup/license",
+                json={
+                    "licenseText": "skipLicense:true"
+                })
             result.raise_for_status()
+            result_body = result.json()
+            print(result_body)
+        else:
+            result = self.session.post(
+                Setup.BASE_URL + "/mgmt/setup/license/activate",
+                json={
+                    "baseRegKey": license_key,
+                    "addOnKeys":[],
+                    "activationMethod":"AUTOMATIC"
+                })
+            result.raise_for_status()
+            result_body = result.json()
+            print(result_body)
+            if "NEED_EULA_ACCEPT" in result_body.get("status"):
+                print("Accepting EULA")
+
+                accept_eula_body = {
+                    "baseRegKey": license_key,
+                    "dossier": result_body.get("dossier"),
+                    "eulaText": result_body.get("eulaText")
+                }
+                result = self.session.post(
+                    Setup.BASE_URL + "/mgmt/setup/license/accept-eula",
+                    json=accept_eula_body
+                )
+                result.raise_for_status()
 
         print("Saving license to service.config.json")
         self.session.post(
