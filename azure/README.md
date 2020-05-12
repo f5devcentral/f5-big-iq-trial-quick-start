@@ -94,6 +94,7 @@ Troubleshooting
 2. In the BIG-IQ CLI, check following logs: /var/log/setup.log, /var/log/restjavad.0.log.
 3. In the Azure Marketplace, ensure that programmatic deployment is enabled for F5 products.
 4. If you encounter a **MarketPurchaseEligibility** error while deploying the template, check the availability of BIG-IQ.
+5. If you encounter *ModuleNotLicensed:LICENSE INOPERATIVE:Standalone* on the DCD CLI, it can be ignored (when using skipLicense:true).
 
 ### Copyright
 

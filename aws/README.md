@@ -104,6 +104,7 @@ Troubleshooting
 3.	In AWS Marketplace, ensure you have subscribed and accepted the terms for F5 products.
 4.	In AWS CFT Console, check the CFT status, make sure it is COMPLETED.
 5.	In AWS IAM Console, confirm the Access Key has the necessary permissions.
+6. If you encounter *ModuleNotLicensed:LICENSE INOPERATIVE:Standalone* on the DCD CLI, it can be ignored (when using skipLicense:true).
 
 ### Copyright
 
