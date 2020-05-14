@@ -29,9 +29,11 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 5. In the ARM Template, populate this information:
 
    * Resource group (select existing or create new)
+   * Location (the default is the resource group's location; change if you want to deploy the resources in another location)
    * Admin user name (default value is **azureuser**)
    * Authentication type (password or ssh key string)
    * Password / sshPublicKey for the BIG-IQ Data Collection Device (DCD) and Centralized Management (CM) instances (you will connect to the instances by using these credentials)
+   * Instance Size (Standard_D8_v3 recommended)
    * BIG-IQ password (management console's password)
    * BIG-IQ Centralized Management (CM) License Key (from F5 trial **BIG-IQ Console Node**)
    * BIG-IQ Data Collection Device (DCD) License Key (use **skipLicense:true**)
@@ -41,7 +43,7 @@ To deploy this ARM template in Azure cloud, complete the following steps.
       * 1 or more lowercase letters
       * 1 or more numbers
       * 1 or more special characters
-   * Location (the default is the resource group's location; change if you want to deploy the resources in another location)
+   * Restricted Src Address for SSH Access ([get your public IP](https://www.whatismyip.com))
 
 6. Accept the terms and conditions and launch the cloud deployment. 
 
@@ -55,7 +57,8 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-1-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
     * Manage your existing BIG-IP(s) on premise (need VPN or Azure Direct Connect) or in the cloud.
-    * Don't have BIG-IP yet? stand one up in Azure and use one of the [F5 template](https://github.com/F5Networks/f5-azure-arm-templates)
+    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/azure_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-azure-cloud/add-and-configure-big-ip-ve-devices-in-an-azure-cloud.html)
+
 
 For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0).
 

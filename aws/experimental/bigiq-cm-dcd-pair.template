@@ -187,7 +187,7 @@
                 "m4.8xlarge"
             ],
             "ConstraintDescription": "Must be a valid EC2 instance type for BIG-IQ",
-            "Default": "m4.2xlarge",
+            "Default": "m4.4xlarge",
             "Description": "Size of the F5 BIG-IQ Virtual Instance",
             "Type": "String"
         },
