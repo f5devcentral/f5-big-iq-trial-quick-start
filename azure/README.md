@@ -56,8 +56,8 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
 9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-1-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
-    * Manage your existing BIG-IP(s) on premise (need VPN or Azure Direct Connect) or in the cloud.
-    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/azure_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-azure-cloud/add-and-configure-big-ip-ve-devices-in-an-azure-cloud.html)
+    * Manage your existing BIG-IP(s) on premise (need VPN/Azure Direct Connect) or in the cloud.
+    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/azure_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-azure-cloud/add-and-configure-big-ip-ve-devices-in-an-azure-cloud.html).
 
 
 For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0).

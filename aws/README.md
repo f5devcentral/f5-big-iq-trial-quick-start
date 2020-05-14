@@ -65,7 +65,7 @@ To deploy this CFT in AWS, complete the following steps.
 7. Use admin user and your AWS SSH key to SSH into the BIG-IQ CM instance, then execute the following commands:
 
    ```
-   # ssh ~/.ssh/privatekey.pem admin@1.2.3.4
+   # ssh ~/.ssh/privatekey.pem admin@1.2.3.5
    (tmos)# bash
    # /config/cloud/setup-cm.sh
    ```
@@ -80,8 +80,8 @@ To deploy this CFT in AWS, complete the following steps.
 
 9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-1-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
-    * Manage your existing BIG-IP(s) on premise (need VPN or AWS Direct Connect) or in the cloud.
-    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/aws_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-aws-cloud/adding-and-configuring-big-ip-ve-devices-in-aws-cloud.html)
+    * Manage your existing BIG-IP(s) on premise (need VPN/AWS Direct Connect) or in the cloud.
+    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/aws_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-aws-cloud/adding-and-configuring-big-ip-ve-devices-in-aws-cloud.html).
 
 For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0).
 
