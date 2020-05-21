@@ -44,7 +44,7 @@ To deploy this ARM template in Azure cloud, complete the following steps.
       * 1 or more numbers
       * 1 or more special characters
    * Restricted Src Address for SSH Access ([get your public IP](https://www.whatismyip.com))
-   * Custom DNS, only for *existing VNET* (set **true** if your VNet uses custom DNS servers, you may need to update the DNS server in BIG-IQ afterwards)
+   * Custom DNS, only for *existing VNET* (set **true** if your VNet uses custom DNS servers, you may need to update the DNS servers in BIG-IQ afterwards)
 
 6. Accept the terms and conditions and launch the cloud deployment. 
 
