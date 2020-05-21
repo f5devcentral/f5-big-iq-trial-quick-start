@@ -130,6 +130,17 @@
                 "description": "A unique CloudFormation StackName within your azure account, to be used to set CM server instance."
             }
         },
+        "customDNS": {
+            "defaultValue": false,
+            "allowedValues": [
+                true,
+                false
+            ],
+            "metadata": {
+                "description": "Select True if you are using your own DNS server instead of the Azure DHCP supplied DNS server."
+            },
+            "type" : "bool"
+        },
         "customImage": {
             "defaultValue": "OPTIONAL",
             "type": "string",
@@ -188,6 +199,7 @@
         "virtualNetworkName": "[parameters('vnetName')]",
         "mgmtSubnetName": "[parameters('mgmtSubnetName')]",
         "internalSubnetName": "[parameters('internalSubnetName')]",
+        "customDNS": "[parameters('customDNS')]",
         "vnetId": "[resourceId(parameters('vnetResourceGroupName'),'Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
         "publicIPAddressType": "Static",
         "extPublicIPAddressName": "[concat('BIG-IQ-DCD-IP-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
@@ -202,7 +214,6 @@
         "mgmtNsgID": "[resourceId('Microsoft.Network/networkSecurityGroups/',variables('mgmtNsgName'))]",      
         "intpublicIPAddressName": "[concat('BIG-IQ-CM-IP-' , variables('resourceGroupName'),'-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "cmPublicIPAddressId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('intPublicIPAddressName'))]",
-        "mgmtRouteGw": "`tmsh list sys management-route default gateway | grep gateway | sed 's/gateway //;s/ //g'`",
         "tagValues": "[parameters('tagValues')]",
         "lbDnsName" : "[concat( 'ip10-azureinternal-f5','-',uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name))]",
         "newDataStorageAccountName": "[concat(uniquestring(variables('resourceGroupName'), resourceGroup().id, deployment().name), 'data000')]",
@@ -386,7 +397,8 @@
                 ],
                 "networkSecurityGroup": {
                     "id": "[variables('mgmtNsgID')]"
-                }
+                },
+                "dnsSettings": "[if(variables('customDNS'),json('{\"dnsServers\": [ \"168.63.129.16\" ] }'),'\"AzureProvidedDNS\"')]"
             },
             "dependsOn": [
                 "[variables('dcdPublicIPAddressId')]",
@@ -416,7 +428,8 @@
                 ],
                 "networkSecurityGroup": {
                     "id": "[variables('mgmtNsgID')]"
-                }
+                },
+                "dnsSettings": "[if(variables('customDNS'),json('{\"dnsServers\": [ \"168.63.129.16\" ] }'),'\"AzureProvidedDNS\"')]"
             },
             "dependsOn": [
                 "[variables('cmPublicIPAddressId')]",
@@ -614,7 +627,7 @@
             "tags": "[if(empty(variables('tagValues')), json('null'), variables('tagValues'))]",
             "properties": {
                 "protectedSettings": {
-                    "commandToExecute": "[concat('sleep 30 ; tmsh create sys management-route waagent_route network 168.63.129.16/32 gateway ',variables('mgmtRouteGw'),' ; tmsh save sys config','\n','mkdir -p /config/cloud; cd /config/cloud ; curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ', variables('singleQuote'),concat('#!/usr/bin/env bash','\n','sleep 180','\n','mkdir -p /config/cloud \n','cd /config/cloud \n','curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz ','\n','tmsh create auth user adminUser password ',variables('bigIqPassword'),' shell tmsh partition-access add {all-partitions {role admin}} && tmsh save sys config' ,'\n','/config/cloud/wait-for-service.py \n','tmsh modify auth user admin password ',variables('bigIqPassword'),' && tmsh save sys config \n','/config/cloud/bigiq-config.py --timezone America/Los_Angeles --ntp_servers time.windows.com --dns_servers 168.63.129.16 --managementIpAddress ', reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress ,' --discoveryAddress ', reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --user admin --password ', variables('bigIqPassword'),' --licensekey ', parameters('bigIqDCDLicenseKey2'),' --masterkey ', parameters('bigIQMasterPassphraseKey'),' --hostname ',reference(variables('extPublicIPAddressName')).dnsSettings.fqdn, ' --personality logging_node'),variables('singleQuote') ,' > /config/cloud/setup-dcd-background.sh; chmod +x /config/cloud/setup-dcd-background.sh;','echo ', variables('dcdStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-dcd.sh; chmod +x /config/cloud/setup-dcd.sh;nohup /config/cloud/setup-dcd.sh &> /var/log/setup.log < /dev/null &')]"
+                    "commandToExecute": "[concat('mkdir -p /config/cloud; cd /config/cloud ; curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ', variables('singleQuote'),concat('#!/usr/bin/env bash','\n','sleep 180','\n','mkdir -p /config/cloud \n','cd /config/cloud \n','curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz ','\n','tmsh create auth user adminUser password ',variables('bigIqPassword'),' shell tmsh partition-access add {all-partitions {role admin}} && tmsh save sys config' ,'\n','/config/cloud/wait-for-service.py \n','tmsh modify auth user admin password ',variables('bigIqPassword'),' && tmsh save sys config \n','/config/cloud/bigiq-config.py --timezone America/Los_Angeles --ntp_servers time.windows.com --dns_servers 168.63.129.16 --managementIpAddress ', reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress ,' --discoveryAddress ', reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --user admin --password ', variables('bigIqPassword'),' --licensekey ', parameters('bigIqDCDLicenseKey2'),' --masterkey ', parameters('bigIQMasterPassphraseKey'),' --hostname ',reference(variables('extPublicIPAddressName')).dnsSettings.fqdn, ' --personality logging_node'),variables('singleQuote') ,' > /config/cloud/setup-dcd-background.sh; chmod +x /config/cloud/setup-dcd-background.sh;','echo ', variables('dcdStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-dcd.sh; chmod +x /config/cloud/setup-dcd.sh;nohup /config/cloud/setup-dcd.sh &> /var/log/setup.log < /dev/null &')]"
                 },
                 "publisher": "Microsoft.Azure.Extensions",
                 "settings": {
@@ -636,7 +649,7 @@
             "tags": "[if(empty(variables('tagValues')), json('null'), variables('tagValues'))]",
             "properties": {
                 "protectedSettings": {
-                     "commandToExecute": "[concat('sleep 30 ; tmsh create sys management-route waagent_route network 168.63.129.16/32 gateway ',variables('mgmtRouteGw'),' ; tmsh save sys config','\n','sleep 180; pip install azure;mkdir -p /config/cloud; cd /config/cloud ; curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ' ,variables('singleQuote') , concat('#!/usr/bin/env bash','\n','sleep 90','\n','mkdir -p /config/cloud\n','cd /config/cloud \n','curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz \n','/config/cloud/bigiq-config.py --timezone America/Los_Angeles --ntp_servers time.windows.com --dns_servers 168.63.129.16 --managementIpAddress ', reference(variables('intNicID')).ipConfigurations[0].properties.privateIPAddress ,' --discoveryAddress ', reference(variables('intNicID')).ipConfigurations[0].properties.privateIPAddress,' --user admin --password ', variables('bigIqPassword'),' --licensekey ', parameters('bigIqCMLicenseKey1'),' --masterkey ', parameters('bigIQMasterPassphraseKey'),' --hostname ',reference(variables('intPublicIPAddressName')).dnsSettings.fqdn, ' --personality big_iq','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ failed, might be an issue with license activation, tail -f /var/log/setup.log for more details.','\n','  exit 1','\n','fi\n','sleep 10\n','/config/cloud/add-dcd.py --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --DCD_PWD ',variables('bigIqPassword'),' --DCD_USERNAME adminUser','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ DCD to CM failed, tail -f /var/log/restjavad.0.log for more details.','\n','fi\n','sleep 10\n','chmod +x /config/cloud/import-as3-templates.sh; /config/cloud/import-as3-templates.sh','\n','set-basic-auth on','\n','/config/cloud/activate-dcd-services.py --SERVICES asm access dos websafe ipsec afm --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,'\n'), variables('singleQuote'), ' > /config/cloud/setup-cm-background.sh;chmod +x /config/cloud/setup-cm-background.sh;','echo ', variables('cmStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-cm.sh; chmod +x /config/cloud/setup-cm.sh;nohup /config/cloud/setup-cm.sh &> /var/log/setup.log < /dev/null &')]"
+                     "commandToExecute": "[concat('sleep 180; pip install azure;mkdir -p /config/cloud; cd /config/cloud ; curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz ;tar --strip-components=1 -xvzf scripts.tar.gz ; echo ' ,variables('singleQuote') , concat('#!/usr/bin/env bash','\n','sleep 90','\n','mkdir -p /config/cloud\n','cd /config/cloud \n','curl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/7.1.0/scripts.tar.gz > scripts.tar.gz \n','tar --strip-components=1 -xvzf scripts.tar.gz \n','/config/cloud/bigiq-config.py --timezone America/Los_Angeles --ntp_servers time.windows.com --dns_servers 168.63.129.16 --managementIpAddress ', reference(variables('intNicID')).ipConfigurations[0].properties.privateIPAddress ,' --discoveryAddress ', reference(variables('intNicID')).ipConfigurations[0].properties.privateIPAddress,' --user admin --password ', variables('bigIqPassword'),' --licensekey ', parameters('bigIqCMLicenseKey1'),' --masterkey ', parameters('bigIQMasterPassphraseKey'),' --hostname ',reference(variables('intPublicIPAddressName')).dnsSettings.fqdn, ' --personality big_iq','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ failed, might be an issue with license activation, tail -f /var/log/setup.log for more details.','\n','  exit 1','\n','fi\n','sleep 60\n','/config/cloud/add-dcd.py --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,' --DCD_PWD ',variables('bigIqPassword'),' --DCD_USERNAME adminUser','\n','if [ $? -ne 0 ]','\n','then','\n','  echo Configuring BIG-IQ DCD to CM failed, tail -f /var/log/restjavad.0.log for more details.','\n','fi\n','sleep 10\n','chmod +x /config/cloud/import-as3-templates.sh; /config/cloud/import-as3-templates.sh','\n','set-basic-auth on','\n','/config/cloud/activate-dcd-services.py --SERVICES asm access dos websafe ipsec afm --DCD_IP_ADDRESS ',reference(variables('mgmtNicID')).ipConfigurations[0].properties.privateIPAddress,'\n'), variables('singleQuote'), ' > /config/cloud/setup-cm-background.sh;chmod +x /config/cloud/setup-cm-background.sh;','echo ', variables('cmStartUpScript'), ' | /usr/bin/base64 -d > /config/cloud/setup-cm.sh; chmod +x /config/cloud/setup-cm.sh;nohup /config/cloud/setup-cm.sh &> /var/log/setup.log < /dev/null &')]"
                 },
                 "publisher": "Microsoft.Azure.Extensions",
                 "settings": {
