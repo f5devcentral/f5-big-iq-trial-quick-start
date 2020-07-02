@@ -8,6 +8,9 @@ BIG-IQ Centralized Management Trial Quick Start - AWS
 Instructions for AWS
 --------------------
 
+<p align="center"><a href="https://www.youtube.com/watch?v=pgdcLOmKxtQ" target=”_blank”>Watch the Video Tutorial for AWS<br/>
+<img width="60%" height="60%" src="https://img.youtube.com/vi/pgdcLOmKxtQ/3.jpg"></a></p>
+
 To deploy this CFT in AWS, complete the following steps.
 
 *Expected time: ~15 min*
