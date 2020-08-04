@@ -194,9 +194,9 @@
             "Type": "String"
         },
         "masterPassphrase": {
-            "ConstraintDescription": "Verify your Master Key Passphrase 16-characters min.",
+            "ConstraintDescription": "F5 BIG-IQ Master Key Passphrase 16 characters or longer, 1 or more capital letters, 1 or more lowercase letters, 1 or more numbers, 1 or more special characters.",
             "Default": "Thisisthemasterkey#1234",
-            "Description": "F5 BIG-IQ Master Key Passphrase",
+            "Description": "F5 BIG-IQ Master Key Passphrase 16 characters or longer, 1 or more capital letters, 1 or more lowercase letters, 1 or more numbers, 1 or more special characters.",
             "MaxLength": 255,
             "MinLength": 16,
             "Type": "String"

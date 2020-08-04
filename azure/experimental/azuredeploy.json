@@ -78,7 +78,7 @@
             "maxLength": 255,
             "type": "string",
             "metadata": {
-                "description": "F5 BIG-IQ Master Key Passphrase 16-characters min."
+                "description": "F5 BIG-IQ Master Key Passphrase 16 characters or longer, 1 or more capital letters, 1 or more lowercase letters, 1 or more numbers, 1 or more special characters."
             }
         },
         "location": {
