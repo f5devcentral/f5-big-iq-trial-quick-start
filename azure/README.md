@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start - Azure
 =======================================================
 
-**Note:** This template uses BIG-IQ 7.1.0
+**Note:** This template uses BIG-IQ 7.1.0.1
 
 ![Deployment Diagram](../images/diagram-bigiq-azure.png)
 
