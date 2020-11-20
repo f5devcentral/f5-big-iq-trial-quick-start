@@ -46,9 +46,9 @@
             }
         },
         "bigIqVersion": {
-            "defaultValue": "7.1.001000",
+            "defaultValue": "7.1.002000",
             "allowedValues": [
-                "7.1.001000"
+                "7.1.002000"
                 ],
             "type": "string",
             "metadata": {

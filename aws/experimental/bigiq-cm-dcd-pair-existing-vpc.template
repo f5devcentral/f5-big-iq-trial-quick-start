@@ -2,49 +2,49 @@
     "Mappings": {
         "AmiRegionMap": {
             "eu-north-1": {
-                "bigiq": "ami-0c414216b3d39542b"
+                "bigiq": "ami-0042cfc03a6194fbe"
             },
             "ap-south-1": {
-                "bigiq": "ami-0d2ab93e3735bf026"
+                "bigiq": "ami-023843f7cf0f1bed2"
             },
             "eu-west-2": {
-                "bigiq": "ami-0555a9c96cc13e44c"
+                "bigiq": "ami-004d01250542fcb5f"
             },
             "eu-west-1": {
-                "bigiq": "ami-07224dc84ff7d95f3"
+                "bigiq": "ami-06b5791ec345715fa"
             },
             "ap-northeast-2": {
-                "bigiq": "ami-087a39c1f11b62c59"
+                "bigiq": "ami-0834c927d12f53c30"
             },
             "ap-northeast-1": {
-                "bigiq": "ami-017f288992642f23b"
+                "bigiq": "ami-0601528a7ac173bbe"
             },
             "sa-east-1": {
-                "bigiq": "ami-0d5acbbaa9e6ec8d7"
+                "bigiq": "ami-07a8a5001661ebf4d"
             },
             "ca-central-1": {
-                "bigiq": "ami-05ba195fb8314a730"
+                "bigiq": "ami-02dec057a6aa5f603"
             },
             "ap-southeast-1": {
-                "bigiq": "ami-076180099b5434bcf"
+                "bigiq": "ami-04dc264fcc9855731"
             },
             "ap-southeast-2": {
-                "bigiq": "ami-00a66f9de432788c9"
+                "bigiq": "ami-0c78ba7898317af81"
             },
             "eu-central-1": {
-                "bigiq": "ami-0b40bdb23da0ddc39"
+                "bigiq": "ami-03ed2d05b6c3aaaff"
             },
             "us-east-1": {
-                "bigiq": "ami-02eb44a3136461d91"
+                "bigiq": "ami-06b2bfe19459a47ab"
             },
             "us-east-2": {
-                "bigiq": "ami-06add451df1ac5c71"
+                "bigiq": "ami-05d5e94d6a2d4aacb"
             },
             "us-west-1": {
-                "bigiq": "ami-0cdd6c3fb91fc375c"
+                "bigiq": "ami-04c00f0fbcba87429"
             },
             "us-west-2": {
-                "bigiq": "ami-01c2e3ae090603957"
+                "bigiq": "ami-052ac222dcb3a85c5"
             }
         }
     },
