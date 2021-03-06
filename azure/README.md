@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start - Azure
 =======================================================
 
-**Note:** This template uses BIG-IQ 7.1.0.1
+**Note:** This template uses BIG-IQ 8.0.0
 
 ![Deployment Diagram](../images/diagram-bigiq-azure.png)
 
@@ -22,9 +22,9 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
 4. Launch the *trial stack* template by right-clicking this button and choosing **Open link in new window**:
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.1.0%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.0.0%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
 
-    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F7.1.0%2Fazure%2Fexperimental%2Fazure-deploy-with-existing-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
+    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.0.0%2Fazure%2Fexperimental%2Fazure-deploy-with-existing-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
    
 5. In the ARM Template, populate this information:
 
@@ -58,10 +58,10 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 9. Start managing BIG-IP devices from BIG-IQ, go to the [BIG-IQ Knowledge Center](https://techdocs.f5.com/en-us/bigiq-7-1-0/managing-big-ip-devices-from-big-iq/device-discovery-and-basic-management.html).
 
     * Manage your existing BIG-IP(s) on premise (need VPN/Azure Direct Connect) or in the cloud.
-    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/azure_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-7-1-0/add-configure-big-ip-ve-in-azure-cloud/add-and-configure-big-ip-ve-devices-in-an-azure-cloud.html).
+    * Don't have BIG-IP yet? deploy a VE in AWS from the [marketplace](https://clouddocs.f5.com/cloud/public/v1/azure_index.html) or using [BIG-IQ](https://techdocs.f5.com/en-us/bigiq-8-0-0/big-iq-centralized-management-and-msft-azure-setup.html).
 
 
-For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=7.1.0).
+For more information, go to [the BIG-IQ Centralized Management Knowledge Center](https://support.f5.com/csp/knowledge-center/software/BIG-IQ?module=BIG-IQ%20Centralized%20Management&version=8.0.0).
 
 Security instructions
 ---------------------
@@ -102,7 +102,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2020 F5 Networks Inc.
+Copyright 2021 F5 Networks Inc.
 
 ### License
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Note: the as3 tempaltes for 7.1 and 8.0 are the same, no new templates in 8.0
 cd /home/admin;
 rm -rf f5-big-iq*.tar.gz f5devcentral-f5-big-iq-*;
 curl -L https://github.com/f5devcentral/f5-big-iq/tarball/7.1.0 > f5-big-iq.tar.gz;

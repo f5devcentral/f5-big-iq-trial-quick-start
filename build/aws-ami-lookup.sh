@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+#set -x
+
 echo "Searching for image where name begins with $1"
-# e.g. "F5 Networks BYOL BIG-IQ-7.0.0.1.0.0.6"
+# e.g. "F5 Networks BYOL BIG-IQ-7.1.0.3.0.0.41, F5 Hourly BIG-IQ-8.0.0-0.0.594"
 regions=$(aws ec2 describe-regions --output text --query 'Regions[*].RegionName')
 json=""
 for region in $regions; do
