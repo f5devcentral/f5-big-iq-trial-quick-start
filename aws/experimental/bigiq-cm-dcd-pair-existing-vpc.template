@@ -433,7 +433,7 @@
                             "",
                             [
                                 "#!/bin/bash\n",
-                                /opt/aws/apitools/cfn-init/bin/cfn-init -v -s ",
+                                "/opt/aws/apitools/cfn-init/bin/cfn-init -v -s ",
                                 {
                                     "Ref": "AWS::StackId"
                                 },
@@ -621,7 +621,7 @@
                             "",
                             [
                                 "#!/bin/bash\n",
-                                /opt/aws/apitools/cfn-init/bin/cfn-init -v -s ",
+                                "/opt/aws/apitools/cfn-init/bin/cfn-init -v -s ",
                                 {
                                     "Ref": "AWS::StackId"
                                 },
