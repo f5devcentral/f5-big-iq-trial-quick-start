@@ -45,7 +45,7 @@ To deploy this CFT in AWS, complete the following steps.
       * 1 or more lowercase letters
       * 1 or more numbers
       * 1 or more special characters
-   * Instance Size (m4.2xlarge recommended)
+   * Instance Size (m4.2xlarge or m5.2xlarge recommended)
    * Source Address(es) for SSH Access ([get your public IP](https://www.whatismyip.com))
    * SSH Key (your AWS key pair name)
 
