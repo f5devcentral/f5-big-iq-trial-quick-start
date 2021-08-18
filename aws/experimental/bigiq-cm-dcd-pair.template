@@ -1,6 +1,5 @@
 {
     "Mappings": {
-    "Mappings": {
         "AmiRegionMap": {
             "af-south-1": {
                 "bigiq": "ami-0784418d0adf16ea4"
