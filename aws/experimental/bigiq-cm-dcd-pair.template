@@ -1,59 +1,60 @@
 {
     "Mappings": {
+    "Mappings": {
         "AmiRegionMap": {
             "af-south-1": {
-                "bigiq": "ami-06e6299c80ac0bf2f"
+                "bigiq": "ami-0784418d0adf16ea4"
             },
             "eu-north-1": {
-                "bigiq": "ami-092d21502dc231ab4"
+                "bigiq": "ami-0cde5a24d07177b75"
             },
             "ap-south-1": {
-                "bigiq": "ami-05ecc87ee805f3079"
+                "bigiq": "ami-092c7946aab87a37b"
             },
             "eu-west-3": {
-                "bigiq": "ami-08b154a5a22197cb5"
+                "bigiq": "ami-01561e01353dffdf5"
             },
             "eu-west-2": {
-                "bigiq": "ami-076f3bce0c2ee7009"
+                "bigiq": "ami-03dfcb43a3cec887d"
             },
             "eu-west-1": {
-                "bigiq": "ami-02e1547a6cf86f90b"
+                "bigiq": "ami-01dfc4c626a8dd1e5"
             },
             "ap-northeast-3": {
-                "bigiq": "ami-069f889830de827cd"
+                "bigiq": "ami-0137cab1c25f74588"
             },
             "ap-northeast-2": {
-                "bigiq": "ami-05f2f97313d1cc4fe"
+                "bigiq": "ami-010928a3d8e85a49d"
             },
             "ap-northeast-1": {
-                "bigiq": "ami-026e2e3a488394be1"
+                "bigiq": "ami-0221327e90270f4e6"
             },
             "sa-east-1": {
-                "bigiq": "ami-031b968d509445a4c"
+                "bigiq": "ami-00d039aa23f29ea78"
             },
             "ca-central-1": {
-                "bigiq": "ami-02271a6c5748fca0c"
+                "bigiq": "ami-0844ce0336f4d956c"
             },
             "ap-southeast-1": {
-                "bigiq": "ami-0c5c9e09cbf12153f"
+                "bigiq": "ami-05443bd06b541805b"
             },
             "ap-southeast-2": {
-                "bigiq": "ami-025516779b78fab53"
+                "bigiq": "ami-03f7bfc34834385d7"
             },
             "eu-central-1": {
-                "bigiq": "ami-03bdb9b11549ed3bc"
+                "bigiq": "ami-07a8a21329f3f190c"
             },
             "us-east-1": {
-                "bigiq": "ami-012aff9dc8de65e09"
+                "bigiq": "ami-01fcbd28d9d7e9786"
             },
             "us-east-2": {
-                "bigiq": "ami-0a87af4b431a7ece8"
+                "bigiq": "ami-00858258c66b24d80"
             },
             "us-west-1": {
-                "bigiq": "ami-01484b5bb42789a3a"
+                "bigiq": "ami-014cd32e788ed50d4"
             },
             "us-west-2": {
-                "bigiq": "ami-0190434ceacebc141"
+                "bigiq": "ami-03cb4c8e92ce69d1e"
             }
         }
     },
@@ -274,7 +275,7 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0.1/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
                                             "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
                                             {
@@ -506,7 +507,7 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0.1/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
                                             "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
                                             {
