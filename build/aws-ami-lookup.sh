@@ -2,7 +2,7 @@
 #set -x
 
 echo "Searching for image where name contains $1"
-# e.g. "BIG-IQ-8.1.0-0.0.244, BIG-IQ-8.1.0.1-0.0.30"
+# e.g. "BIG-IQ-8.1.0-0.0.244, BIG-IQ-8.1.0.2-0.0.36"
 regions=$(aws ec2 describe-regions --output text --query 'Regions[*].RegionName')
 json=""
 for region in $regions; do
