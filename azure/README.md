@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start - Azure
 =======================================================
 
-**Note:** This template uses BIG-IQ 8.1.0.2
+**Note:** This template uses BIG-IQ 8.2.0
 
 ![Deployment Diagram](../images/diagram-bigiq-azure.png)
 
@@ -22,9 +22,9 @@ To deploy this ARM template in Azure cloud, complete the following steps.
 
 4. Launch the *trial stack* template by right-clicking this button and choosing **Open link in new window**:
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.1.0.2%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
+   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.2.0%2Fazure%2Fexperimental%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (new VNET)
 
-    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.1.0.2%2Fazure%2Fexperimental%2Fazure-deploy-with-existing-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
+    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ff5devcentral%2Ff5-big-iq-trial-quick-start%2F8.2.0%2Fazure%2Fexperimental%2Fazure-deploy-with-existing-vnet.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a> (existing VNET)
    
 5. In the ARM Template, populate this information:
 
@@ -102,7 +102,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2021 F5, Inc.
+Copyright 2022 F5, Inc.
 
 ### License
 

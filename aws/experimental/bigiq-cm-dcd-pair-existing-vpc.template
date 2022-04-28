@@ -2,67 +2,67 @@
     "Mappings": {
         "AmiRegionMap": {
             "af-south-1": {
-                "bigiq": "ami-0ea428151263c271b"
+                "bigiq": "ami-0f5317653790a3f5a"
             },
             "eu-north-1": {
-                "bigiq": "ami-04791f532d82e3d3a"
+                "bigiq": "ami-073d2b3169433e6b1"
             },
             "ap-south-1": {
-                "bigiq": "ami-0ebe81038929c3e7f"
+                "bigiq": "ami-0bdccd36526f2a91b"
             },
             "eu-west-3": {
-                "bigiq": "ami-031dccdaa263a1b04"
+                "bigiq": "ami-052a3faffcdb8f850"
             },
             "eu-west-2": {
-                "bigiq": "ami-07adc58001662380a"
-            },
-            "eu-west-1": {
-                "bigiq": "ami-08b8f5825166d9c78"
-            },
-            "ap-northeast-3": {
-                "bigiq": "ami-09217743b09c67a8f"
-            },
-            "ap-northeast-2": {
-                "bigiq": "ami-014ac3d4f49aaa52f"
-            },
-            "ap-northeast-1": {
-                "bigiq": "ami-021bdf2167b64f5b0"
-            },
-            "sa-east-1": {
-                "bigiq": "ami-0621c79d90d380f61"
-            },
-            "ca-central-1": {
-                "bigiq": "ami-0e5150a4a12d37f35"
-            },
-            "ap-southeast-1": {
-                "bigiq": "ami-06c4c002fc57e5357"
-            },
-            "ap-southeast-2": {
-                "bigiq": "ami-0f21b51a18a3165d5"
-            },
-            "eu-central-1": {
-                "bigiq": "ami-07aab01e029999c58"
-            },
-            "us-east-1": {
-                "bigiq": "ami-0cc75e62718c469e6"
-            },
-            "us-east-2": {
-                "bigiq": "ami-071e6892e09b477e2"
-            },
-            "us-west-1": {
-                "bigiq": "ami-0eac67f11aa63be3a"
-            },
-            "us-west-2": {
-                "bigiq": "ami-0bc4ac79873f415a5"
+                "bigiq": "ami-02f0b62631e127a16"
             },
             "eu-south-1": {
-                "bigiq": "ami-0f81c1822e33a742b"
+                "bigiq": "ami-0ed69b30ac2ae2bfe"
             },
-            "ap-east-1": {
-                "bigiq": "ami-0fb6d2deb18311600"
+            "eu-west-1": {
+                "bigiq": "ami-07de34be2ca0cc754"
+            },
+            "ap-northeast-3": {
+                "bigiq": "ami-0b7bc38a3b1959665"
+            },
+            "ap-northeast-2": {
+                "bigiq": "ami-0bdd41362a3a9f3ac"
             },
             "me-south-1": {
-                "bigiq": "ami-098c034c24486a5b8"
+                "bigiq": "ami-0395345e71fcddb8c"
+            },
+            "ap-northeast-1": {
+                "bigiq": "ami-01b3aa8902edeb8ca"
+            },
+            "sa-east-1": {
+                "bigiq": "ami-04dad9978dde7b46a"
+            },
+            "ca-central-1": {
+                "bigiq": "ami-0fa2ef0cd3ea6a065"
+            },
+            "ap-east-1": {
+                "bigiq": "ami-0b9fe49342fdf958f"
+            },
+            "ap-southeast-1": {
+                "bigiq": "ami-05fb379e0c113e575"
+            },
+            "ap-southeast-2": {
+                "bigiq": "ami-011aa7b87788c5e52"
+            },
+            "eu-central-1": {
+                "bigiq": "ami-0d63152b774c2ad9a"
+            },
+            "us-east-1": {
+                "bigiq": "ami-0633238ff2534d0f9"
+            },
+            "us-east-2": {
+                "bigiq": "ami-0f895bb7b451809ea"
+            },
+            "us-west-1": {
+                "bigiq": "ami-06e6ccefe53fabe3a"
+            },
+            "us-west-2": {
+                "bigiq": "ami-07b6fa71cb9b1f20c"
             }
         }
     },
@@ -256,7 +256,7 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0.2/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.2.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
                                             "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
                                             {
@@ -488,7 +488,7 @@
                                         "\n",
                                         [
                                             "#!/usr/bin/env bash",
-                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.1.0.2/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
+                                            "mkdir -p /config/cloud \ncd /config/cloud \ncurl https://s3.amazonaws.com/big-iq-quickstart-cf-templates-aws/8.2.0/scripts.tar.gz > scripts.tar.gz \ntar --strip-components=1 -xvzf scripts.tar.gz \n",
                                             "/config/cloud/wait-for-service.py",
                                             "BIG_IQ_PWD=\"$1\"",
                                             {

@@ -1,7 +1,7 @@
 BIG-IQ Centralized Management Trial Quick Start - AWS
 =====================================================
 
-**Note:** This template uses BIG-IQ 8.1.0.2
+**Note:** This template uses BIG-IQ 8.2.0
 
 ![Deployment Diagram](../images/diagram-bigiq-aws.png)
 
@@ -27,7 +27,7 @@ To deploy this CFT in AWS, complete the following steps.
 
 3. Launch the *trial stack* template by right-clicking this button and choosing **Open link in new window**:
 
-   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F8.1.0.2%2Fbigiq-cm-dcd-pair.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (new VPC)
+   <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F8.2.0%2Fbigiq-cm-dcd-pair.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (new VPC)
 
    <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=F5-BIG-IQ-Trial&templateURL=https:%2F%2Fs3.amazonaws.com%2Fbig-iq-quickstart-cf-templates-aws%2F.1%2Fbigiq-cm-dcd-pair-existing-vpc.template" target="_blank"><img src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"/></a> (existing VPC)
 
@@ -115,7 +115,7 @@ Troubleshooting
 
 ### Copyright
 
-Copyright 2021 F5, Inc.
+Copyright 2022 F5, Inc.
 
 ### License
 
